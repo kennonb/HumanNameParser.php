@@ -40,7 +40,7 @@ class HumanNameParser_Parser {
 	  */
 	  public function setName($name = NULL){
 		  if ($name) {
-		  
+
 			  if (is_object($name) && get_class($name) == "HumanNameParser_Name") { // this is mostly for testing
 				  $this->name = $name;
 			  }
@@ -62,7 +62,7 @@ class HumanNameParser_Parser {
 			  $this->parse();
 		  }
 	  }
-	  
+
 	  public function getleadingInit() {
 		  return $this->leadingInit;
 	  }
@@ -90,9 +90,9 @@ class HumanNameParser_Parser {
 
 	  /**
 	   * returns all the parts of the name as an array
-	   *  
+	   *
 	   * @param String $arrType pass 'int' to get an integer-indexed array (default is associative)
-	   * @return array An array of the name-parts 
+	   * @return array An array of the name-parts
 	   */
 	  public function getArray($arrType = 'assoc') {
 		  $arr = array();
@@ -118,10 +118,10 @@ class HumanNameParser_Parser {
 	   *
 	   * Sequentially captures each name-part, working in from the ends and
 	   * trimming the namestring as it goes.
-	   * 
+	   *
 	   * @return boolean	true on success
 	   */
-	  private function parse() 
+	  private function parse()
 	  {
 		  $suffixes = implode("\.*|", $this->suffixes) . "\.*"; // each suffix gets a "\.*" behind it.
 		  $prefixes = implode(" |", $this->prefixes) . " "; // each prefix gets a " " behind it.
@@ -132,7 +132,7 @@ class HumanNameParser_Parser {
 		  $nicknamesRegex =		"/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /"; // names that starts or end w/ an apostrophe break this
 		  $suffixRegex =			"/,* *($suffixes)$/";
 		  $lastRegex =				"/(?!^)\b([^ ]+ y |$prefixes)*[^ ]+$/";
-		  $leadingInitRegex =	"/^(.\.*)(?= \p{L}{2})/"; // note the lookahead, which isn't returned or replaced
+		  $leadingInitRegex =	"/^((M|m)r(s)?|(M|m)iss|(D|d)r|(P|p)astor|(R|r)ev|R( )?|(A|a)postle|(B|b)ishop|(B|b)rother)(\\.)?/"; // note the lookahead, which isn't returned or replaced
 		  $firstRegex =			"/^[^ ]+/"; //
 
 		  // get nickname, if there is one
@@ -166,7 +166,7 @@ class HumanNameParser_Parser {
 
 
 
-	  
+
 
 }
 ?>
